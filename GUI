@@ -1,0 +1,62 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class GUI extends JFrame{
+    private JPanel panel;
+    private double baseTr, baseRe, heightTr, heightRe ,areaTriangle, perimeterRect, areaRect;
+    private String[] optionsToChoose = {"mm", "cm", "m", "km"};
+    public GUI(){
+        super("Calcolo Area-Perimetro");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(400, 300);
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(5,5));
+        String getUM = (String) JOptionPane.showInputDialog(
+                null,
+                "Which measurement unit would you like to use?",
+                "Choose the measurement unit",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                optionsToChoose,
+                optionsToChoose[3]);
+
+        JLabel baseTrText = new JLabel("Triangle Base: ");
+        JTextField baseTrInput = new JTextField();
+        JLabel heightTrText = new JLabel("Triangle Height: ");
+        JTextField heightTrInput = new JTextField();
+        JLabel baseReText = new JLabel("Rectangle Base: ");
+        JTextField baseReInput = new JTextField();
+        JLabel heightReText = new JLabel("Rectangle Height: ");
+        JTextField heightReInput = new JTextField();
+        JButton btn = new JButton("EXECUTE!");
+        panel.add(baseTrText);
+        panel.add(baseTrInput);
+        panel.add(heightTrText);
+        panel.add(heightTrInput);
+        panel.add(baseReText);
+        panel.add(baseReInput);
+        panel.add(heightReText);
+        panel.add(heightReInput);
+        panel.add(btn);
+        add(panel);
+        setVisible(true);
+        btn.addActionListener(e -> {
+            try {
+                baseTr = Integer.parseInt(baseTrInput.getText());
+                heightTr = Integer.parseInt(heightTrInput.getText());
+                baseRe = Integer.parseInt(baseReInput.getText());
+                heightRe = Integer.parseInt(heightReInput.getText());
+                areaTriangle = (baseTr * heightTr) / 2;
+                perimeterRect = (baseRe + heightRe) * 2;
+                areaRect = baseRe * heightRe;
+                JOptionPane.showMessageDialog(null, "Triangle area: " + areaTriangle + getUM +"; Rectangle perimeter: " + perimeterRect + getUM+ "; Triangle area: " + areaRect + getUM + ".", "Results", JOptionPane.INFORMATION_MESSAGE);
+            } catch(NumberFormatException err) {
+                JOptionPane.showMessageDialog(null, "Insert Values!", "Error", JOptionPane.WARNING_MESSAGE);
+            }
+        });
+    }
+
+    }
+
+            
+        
